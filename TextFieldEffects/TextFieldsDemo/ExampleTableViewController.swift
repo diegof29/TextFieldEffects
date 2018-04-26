@@ -12,6 +12,7 @@ import TextFieldEffects
 class ExampleTableViewController : UITableViewController {
     
     @IBOutlet private var textFields: [TextFieldEffects]!
+    @IBOutlet weak var hoshi: HoshiTextField!
     
     /**
     Set this value to true if you want to see all the "firstName"
@@ -22,8 +23,11 @@ class ExampleTableViewController : UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        hoshi.error = "Some error"
+
         guard prefillTextFields == true else { return }
         
         _ = textFields.map { $0.text = "Raul" }
+        
     }
 }
