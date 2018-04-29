@@ -81,6 +81,8 @@ import UIKit
         }
     }
     
+    open var errorLabel = UILabel()
+    
     private let borderThickness: (active: CGFloat, inactive: CGFloat) = (active: 2, inactive: 0.5)
     private let placeholderInsets = CGPoint(x: 0, y: 6)
     private let textFieldInsets = CGPoint(x: 0, y: 2)
@@ -90,8 +92,6 @@ import UIKit
 
     private var errorHeight: CGFloat = 26
     private var borderOffset: CGFloat = 8
-    
-    private var errorLabel = UILabel()
     
     // MARK: - TextFieldEffects
     
