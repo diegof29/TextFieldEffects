@@ -23,7 +23,7 @@ class ExampleTableViewController : UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        hoshi.error = "Some error"
+        hoshi.error = "Some long long long very very long long long alskdfjlasd asdlkajs dfasdla error!"
 
         guard prefillTextFields == true else { return }
         

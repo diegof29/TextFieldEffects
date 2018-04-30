@@ -91,7 +91,7 @@ import UIKit
     private var activePlaceholderPoint: CGPoint = CGPoint.zero
 
     private var errorHeight: CGFloat = 26
-    private var borderOffset: CGFloat = 8
+    private var borderPosition: CGFloat = 0.6
     
     // MARK: - TextFieldEffects
     
@@ -108,8 +108,9 @@ import UIKit
         layer.addSublayer(activeBorderLayer)
         addSubview(placeholderLabel)
         
-        let errorLabelFrame = CGRect(x: 0, y: (frame.height / 2 + borderOffset), width: frame.width, height: frame.height - (frame.height / 2 + borderOffset))
+        let errorLabelFrame = CGRect(x: 0, y: (frame.height * borderPosition), width: frame.width, height: frame.height - (frame.height * borderPosition))
         errorLabel.frame = errorLabelFrame
+        errorLabel.numberOfLines = 2
         
         errorLabel.font = errorFontFromFont(font!)
         
@@ -185,9 +186,9 @@ import UIKit
     
     private func rectForBorder(_ thickness: CGFloat, isFilled: Bool) -> CGRect {
         if isFilled {
-            return CGRect(origin: CGPoint(x: 0, y: frame.height / 2 + borderOffset), size: CGSize(width: frame.width, height: thickness))
+            return CGRect(origin: CGPoint(x: 0, y: frame.height * borderPosition), size: CGSize(width: frame.width, height: thickness))
         } else {
-            return CGRect(origin: CGPoint(x: 0, y: frame.height / 2 + borderOffset), size: CGSize(width: 0, height: thickness))
+            return CGRect(origin: CGPoint(x: 0, y: frame.height * borderPosition), size: CGSize(width: 0, height: thickness))
         }
     }
     
@@ -215,13 +216,13 @@ import UIKit
     // MARK: - Overrides
     
     override open func editingRect(forBounds bounds: CGRect) -> CGRect {
-        let frame = self.rectForBorder(self.borderThickness.active, isFilled: false)
-        return CGRect(origin: CGPoint(x: frame.minX, y: frame.minY - font!.lineHeight * 2 - textFieldInsets.y), size: bounds.size)
+        let offset = (borderPosition - 0.5) * bounds.height
+        return CGRect(origin: CGPoint(x: bounds.minX, y: offset - font!.lineHeight * 0.6), size: bounds.size)
     }
     
     override open func textRect(forBounds bounds: CGRect) -> CGRect {
-        let frame = self.rectForBorder(self.borderThickness.active, isFilled: false)
-        return CGRect(origin: CGPoint(x: frame.minX, y: frame.minY - font!.lineHeight * 2 - textFieldInsets.y), size: bounds.size)
+        let offset = (borderPosition - 0.5) * bounds.height
+        return CGRect(origin: CGPoint(x: bounds.minX, y: offset - font!.lineHeight * 0.6), size: bounds.size)
     }
     
 }
